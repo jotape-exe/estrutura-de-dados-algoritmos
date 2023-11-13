@@ -10,13 +10,13 @@ class Vetor<T>(private val capacidade: Int) {
     private var elementos: ArrayList<T?> = arrayListOf()
 
     init {
-        for (i in 0..capacidade) {
+        for (i in 0..<capacidade) {
             elementos.add(elemento)
         }
     }
 
-
     fun add(valor: T) {
+        addSize()
         if (tamanho < elementos.size) {
             elementos[tamanho] = valor
             tamanho++
@@ -24,6 +24,39 @@ class Vetor<T>(private val capacidade: Int) {
             throw IndexOutOfBoundsException("Vetor no tamanho máximo")
         }
 
+    }
+    fun add(posicao: Int, valor: T) {
+
+        if (posicao !in 0..<tamanho) {
+            throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
+        }
+
+        addSize()
+
+        for(i in tamanho-1 downTo posicao ){
+            elementos[i+1] = elementos[i]
+        }
+
+        elementos[posicao] = valor
+
+        tamanho++
+    }
+
+    private fun addSize(){
+        if (tamanho == elementos.size){
+            var novosElementos = arrayListOf<T?>()
+
+            for (i in 0..elementos.size*2) {
+                novosElementos.add(elemento)
+            }
+
+            for (i in 0..<elementos.size){
+                novosElementos[i] = elementos[i]
+            }
+
+            elementos = novosElementos
+
+        }
     }
 
     fun length(): Int {
@@ -47,15 +80,6 @@ class Vetor<T>(private val capacidade: Int) {
         return -1
     }
 
-    fun exist(posicao: Int): Boolean{
-        val exist = elementos[posicao] != null
-
-        return exist
-    }
-
-    fun add(posicao: Int, valor: T) {
-        elementos[posicao] = valor
-    }
 
     override fun toString(): String {
         var string = ""

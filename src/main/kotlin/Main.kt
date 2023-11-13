@@ -1,7 +1,7 @@
 import estruturas_de_dados.vetor.Vetor
 
 fun main() {
-    val vetor = Vetor<String>(20)
+    val vetor = Vetor<String>(6)
 
     vetor.add("Elemento 1")
     vetor.add("Elemento 2")
@@ -15,9 +15,15 @@ fun main() {
 
     vetor.add(0, "Novo Elemento 1")
 
-    println(vetor.exist(13))
 
-    println(vetor.get("Elemento 2"))
+
+    println(vetor["Elemento 2"])
+
+    println(vetor.toString())
+
+    vetor.add(0, "Elemento 0")
+    vetor.add(2, "Elemento 22")
+
 
     println(vetor.toString())
 }
