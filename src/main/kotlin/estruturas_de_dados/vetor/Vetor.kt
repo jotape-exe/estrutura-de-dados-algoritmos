@@ -25,11 +25,10 @@ class Vetor<T>(private val capacidade: Int) {
         }
 
     }
+
     fun add(posicao: Int, valor: T) {
 
-        if (posicao !in 0..<tamanho) {
-            throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
-        }
+        validarPosicao(posicao)
 
         addSize()
 
@@ -42,8 +41,23 @@ class Vetor<T>(private val capacidade: Int) {
         tamanho++
     }
 
+    fun remove(posicao: Int){
+        validarPosicao(posicao)
+
+        for (i in posicao..<tamanho){
+            elementos[i] = elementos[i+1]
+        }
+
+        tamanho--
+    }
+
+    fun remove(elemento: T?){
+        remove(get((elemento)))
+    }
+
     private fun addSize(){
         if (tamanho == elementos.size){
+
             var novosElementos = arrayListOf<T?>()
 
             for (i in 0..elementos.size*2) {
@@ -64,22 +78,29 @@ class Vetor<T>(private val capacidade: Int) {
     }
 
     operator fun get(posicao: Int): T? {
-        if (posicao !in 0..<tamanho) {
-            throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
-        }
+        validarPosicao(posicao)
+
         return elementos[posicao]
     }
 
-    operator fun get(elemento: T?): Int{
-        var valor: T? = null
-        for (i in 0..tamanho){
-            if (elementos[i] == elemento){
-                return i
-            }
+    private fun validarPosicao(posicao: Int) {
+        if (posicao !in 0..<tamanho) {
+            throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
         }
-        return -1
     }
 
+    operator fun get(elemento: T?): Int{
+        var posicao: Int = 0
+        for (i in 0..tamanho){
+            if (elementos[i] == elemento){
+                posicao = i
+            }
+        }
+        if (posicao == 0){
+            throw IndexOutOfBoundsException("Elemento ${elemento} não existe no vetor")
+        }
+        return posicao
+    }
 
     override fun toString(): String {
         var string = ""

@@ -15,8 +15,6 @@ fun main() {
 
     vetor.add(0, "Novo Elemento 1")
 
-
-
     println(vetor["Elemento 2"])
 
     println(vetor.toString())
@@ -24,6 +22,12 @@ fun main() {
     vetor.add(0, "Elemento 0")
     vetor.add(2, "Elemento 22")
 
+    println(vetor.length())
+
+    vetor.remove(0)
+    vetor.remove(1)
+    vetor.remove(2)
+    vetor.remove("Elemento 7")
 
     println(vetor.toString())
 }
