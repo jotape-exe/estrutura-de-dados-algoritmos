@@ -32,8 +32,8 @@ class Vetor<T>(private val capacidade: Int) {
 
         addSize()
 
-        for(i in tamanho-1 downTo posicao ){
-            elementos[i+1] = elementos[i]
+        for (i in tamanho - 1 downTo posicao) {
+            elementos[i + 1] = elementos[i]
         }
 
         elementos[posicao] = valor
@@ -41,36 +41,50 @@ class Vetor<T>(private val capacidade: Int) {
         tamanho++
     }
 
-    fun remove(posicao: Int){
+    fun remove(posicao: Int) {
         validarPosicao(posicao)
 
-        for (i in posicao..<tamanho){
-            elementos[i] = elementos[i+1]
+        for (i in posicao..<tamanho) {
+            elementos[i] = elementos[i + 1]
         }
 
         tamanho--
     }
 
-    fun remove(elemento: T?){
+    fun remove(elemento: T?) {
         remove(get((elemento)))
     }
 
-    private fun addSize(){
-        if (tamanho == elementos.size){
+    fun clear() {
+        elementos = arrayListOf()
+    }
+
+    private fun addSize() {
+        if (tamanho == elementos.size) {
 
             var novosElementos = arrayListOf<T?>()
 
-            for (i in 0..elementos.size*2) {
+            for (i in 0..elementos.size * 2) {
                 novosElementos.add(elemento)
             }
 
-            for (i in 0..<elementos.size){
+            for (i in 0..<elementos.size) {
                 novosElementos[i] = elementos[i]
             }
 
             elementos = novosElementos
 
         }
+    }
+
+    fun clone(): Vetor<T?> {
+        var newArray = Vetor<T?>(tamanho)
+
+        for (element in elementos) {
+            newArray.add(element)
+        }
+
+        return newArray
     }
 
     fun length(): Int {
@@ -83,23 +97,23 @@ class Vetor<T>(private val capacidade: Int) {
         return elementos[posicao]
     }
 
+    operator fun get(elemento: T?): Int {
+        var posicao: Int = 0
+        for (i in 0..tamanho) {
+            if (elementos[i] == elemento) {
+                posicao = i
+            }
+        }
+        if (posicao == 0) {
+            throw IndexOutOfBoundsException("Elemento ${elemento} não existe no vetor")
+        }
+        return posicao
+    }
+
     private fun validarPosicao(posicao: Int) {
         if (posicao !in 0..<tamanho) {
             throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
         }
-    }
-
-    operator fun get(elemento: T?): Int{
-        var posicao: Int = 0
-        for (i in 0..tamanho){
-            if (elementos[i] == elemento){
-                posicao = i
-            }
-        }
-        if (posicao == 0){
-            throw IndexOutOfBoundsException("Elemento ${elemento} não existe no vetor")
-        }
-        return posicao
     }
 
     override fun toString(): String {
@@ -115,6 +129,19 @@ class Vetor<T>(private val capacidade: Int) {
 
         return string
 
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Vetor<*>
+
+        return elementos == other.elementos
+    }
+
+    override fun hashCode(): Int {
+        return elementos.hashCode()
     }
 
 

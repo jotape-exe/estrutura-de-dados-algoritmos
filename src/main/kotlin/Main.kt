@@ -29,5 +29,14 @@ fun main() {
     vetor.remove(2)
     vetor.remove("Elemento 7")
 
-    println(vetor.toString())
+    val vetor2: Vetor<String?> = vetor.clone()
+
+    vetor2.add("Elemento vetor 2")
+
+    //vetor.clear()
+
+    println(vetor.equals(vetor2))
+
+    println("Vetor 1 -> ${vetor.toString()}")
+    println("Vetor 2 -> ${vetor2.toString()}")
 }
