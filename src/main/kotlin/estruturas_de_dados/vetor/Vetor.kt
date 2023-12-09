@@ -56,7 +56,9 @@ class Vetor<T>(private val capacidade: Int) {
     }
 
     fun clear() {
-        elementos = arrayListOf()
+        for (i in 0..<elementos.size){
+            elementos[i] = null
+        }
     }
 
     private fun addSize() {
@@ -98,7 +100,24 @@ class Vetor<T>(private val capacidade: Int) {
     }
 
     operator fun get(elemento: T?): Int {
-        var posicao: Int = 0
+        var posicao: Int = -1
+        for (i in 0..<tamanho) {
+            if (elementos[i] == elemento) {
+                posicao = i
+            }
+        }
+        if (posicao == 0) {
+            throw IndexOutOfBoundsException("Elemento ${elemento} não existe no vetor")
+        }
+        return posicao
+    }
+
+    fun contains(elemento: T?): Boolean{
+        return get(elemento) != -1
+    }
+
+    fun lastIndexOf(elemento: T?): Int{
+        var posicao: Int = -1
         for (i in 0..tamanho) {
             if (elementos[i] == elemento) {
                 posicao = i
@@ -143,6 +162,7 @@ class Vetor<T>(private val capacidade: Int) {
     override fun hashCode(): Int {
         return elementos.hashCode()
     }
+
 
 
 }

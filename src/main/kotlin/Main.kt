@@ -8,8 +8,11 @@ fun main() {
     vetor.add("Elemento 3")
     vetor.add("Elemento 4")
     vetor.add("Elemento 5")
+    vetor.add("Elemento 5")
     vetor.add("Elemento 6")
     vetor.add("Elemento 7")
+    vetor.add("Elemento 5")
+    vetor.add("Elemento 5")
 
     println(vetor[2])
 
@@ -24,18 +27,26 @@ fun main() {
 
     println(vetor.length())
 
-    vetor.remove(0)
-    vetor.remove(1)
-    vetor.remove(2)
-    vetor.remove("Elemento 7")
+    //vetor.remove(0)
+    //vetor.remove(1)
+    //vetor.remove(2)
+    //vetor.remove("Elemento 7")
 
     val vetor2: Vetor<String?> = vetor.clone()
 
     vetor2.add("Elemento vetor 2")
 
+    println(vetor.equals(vetor2))
+
+    /*for (i in 0..vetor2.length()-1) {
+        println("index $i, elemento -> ${vetor2[i]}")
+    }*/
+
+    println("Contem Elmento 3 ? ${vetor.contains("Elemento 3")}")
+
     //vetor.clear()
 
-    println(vetor.equals(vetor2))
+    println("Ultimo indice de (Elmento 5): ${vetor2.lastIndexOf("Elemento 5")}")
 
     println("Vetor 1 -> ${vetor.toString()}")
     println("Vetor 2 -> ${vetor2.toString()}")
