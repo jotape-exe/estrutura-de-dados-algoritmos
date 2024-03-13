@@ -1,9 +1,10 @@
 package estruturas_de_dados.vetor
 
+import estruturas_de_dados.base.CommonListStruct
 import kotlin.IllegalArgumentException
 
 
-class Vetor<T>(private val capacidade: Int) {
+class Vetor<T>(capacidade: Int){
 
     private var elemento: T? = null
     private var tamanho: Int = 0

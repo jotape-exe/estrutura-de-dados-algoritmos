@@ -1,7 +1,9 @@
+import estruturas_de_dados.pilha.Pilha
 import estruturas_de_dados.vetor.Vetor
 
 fun main() {
     val vetor = Vetor<String>(6)
+    val pilha = Pilha<String>(10)
 
     vetor.add("Elemento 1")
     vetor.add("Elemento 2")
@@ -13,6 +15,17 @@ fun main() {
     vetor.add("Elemento 7")
     vetor.add("Elemento 5")
     vetor.add("Elemento 5")
+
+    println("Tem coisa? ${pilha.naoEstaVazio()}")
+
+
+    for (i in 0..27 step 3){
+        pilha.empilhar("Elemento ${i}")
+    }
+
+    println(pilha)
+    println("Topo -> ${pilha.topo()}")
+    println("Ta vazia? ${pilha.estaVazio()}")
 
     println(vetor[2])
 
