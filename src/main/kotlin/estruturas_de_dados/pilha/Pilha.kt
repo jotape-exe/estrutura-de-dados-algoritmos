@@ -13,7 +13,6 @@ class Pilha<T>(capacidade: Int) : CommonListStruct<T>(capacidade, "Pilha") {
         return if (super.estaVazio()) null else elementos[--tamanho]
     }
 
-
     fun topo(): T? {
         if (super.estaVazio()) {
             return null

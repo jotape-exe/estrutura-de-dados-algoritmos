@@ -118,6 +118,7 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
         for (i in 0..<elementos.size) {
             elementos[i] = null
         }
+        tamanho = 0
     }
 
     fun estaVazio() = tamanho == 0

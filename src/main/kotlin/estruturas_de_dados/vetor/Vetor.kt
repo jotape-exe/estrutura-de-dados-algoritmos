@@ -60,6 +60,8 @@ class Vetor<T>(capacidade: Int){
         for (i in 0..<elementos.size){
             elementos[i] = null
         }
+
+        tamanho = 0
     }
 
     private fun addSize() {

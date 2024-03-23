@@ -3,7 +3,7 @@ import estruturas_de_dados.vetor.Vetor
 
 fun main() {
     val vetor = Vetor<String>(6)
-    val pilha = Pilha<String>(10)
+    val pilha = Pilha<String>(capacidade = 10)
 
     vetor.add("Elemento 1")
     vetor.add("Elemento 2")
@@ -22,6 +22,10 @@ fun main() {
     for (i in 0..27 step 3){
         pilha.empilhar("Elemento ${i}")
     }
+
+    pilha.clear()
+
+    println("oia ela $pilha")
 
     pilha.desempilhar()
 
