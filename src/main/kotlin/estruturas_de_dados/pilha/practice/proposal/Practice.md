@@ -65,3 +65,26 @@ fun main() {
     
 }
 ````
+
+## 4. Utilizando pilhas desenvolva um algoritmo de converta números decimais para binários
+````kotlin
+//constante apenas para exibicao no console
+const val DECIMAL_EXAMPLE = 56
+fun main(){
+
+    var decimal = DECIMAL_EXAMPLE
+
+    val pilha = Pilha<Int>()
+    val bin = StringBuilder()
+
+
+    //Implemente o código abaixo
+    //...
+    
+    
+    
+    //...
+
+    println("Decimal($DECIMAL_EXAMPLE) para Binario -> ($bin)")
+}
+````
