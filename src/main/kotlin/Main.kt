@@ -23,6 +23,8 @@ fun main() {
         pilha.empilhar("Elemento ${i}")
     }
 
+    pilha.desempilhar()
+
     println(pilha)
     println("Topo -> ${pilha.topo()}")
     println("Ta vazia? ${pilha.estaVazio()}")

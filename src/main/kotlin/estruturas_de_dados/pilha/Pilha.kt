@@ -9,6 +9,10 @@ class Pilha<T>(capacidade: Int) : CommonListStruct<T>(capacidade, "Pilha") {
         super.add(elemento)
     }
 
+    fun desempilhar(): T?{
+        return if (super.estaVazio()) null else elementos[--tamanho]
+    }
+
 
     fun topo(): T? {
         if (super.estaVazio()) {

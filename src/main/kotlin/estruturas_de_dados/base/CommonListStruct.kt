@@ -1,7 +1,5 @@
 package estruturas_de_dados.base;
 
-import estruturas_de_dados.vetor.Vetor
-
 open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
     private var elemento: T? = null
     protected open var tamanho: Int = 0
