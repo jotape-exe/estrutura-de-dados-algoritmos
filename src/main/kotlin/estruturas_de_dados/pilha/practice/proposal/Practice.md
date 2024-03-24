@@ -88,3 +88,46 @@ fun main(){
     println("Decimal($DECIMAL_EXAMPLE) para Binario -> ($bin)")
 }
 ````
+## 5. Como você implementaria um algoritmo em Kotlin para resolver o problema da Torre de Hanoi usando pilhas, garantindo que apenas os movimentos válidos sejam realizados e que cada disco seja movido para a torre correta de acordo com as regras do jogo?
+
+```kotlin
+
+fun main() {
+    val numDiscos = 4
+    val torreA = Pilha<Int>()
+    val torreB = Pilha<Int>()
+    val torreC = Pilha<Int>()
+
+    for (i in numDiscos downTo 1) {
+        torreA.empilhar(i)
+    }
+
+    println("Antes da resolução:")
+    println("Torre A: $torreA")
+    println("Torre B: $torreB")
+    println("Torre C: $torreC")
+
+    //Sua implementação
+    //...
+
+    println("\nDepois da resolução:")
+    println("Torre A: $torreA")
+    println("Torre B: $torreB")
+    println("Torre C: $torreC")
+}
+
+//...
+//Saída esperada
+
+/*
+Antes da resolução:
+Torre A: Pilha[{valor=4},{valor=3},{valor=2},{valor=1},]
+Torre B: Pilha[]
+Torre C: Pilha[]
+
+Depois da resolução:
+Torre A: Pilha[]
+Torre B: Pilha[]
+Torre C: Pilha[{valor=4},{valor=3},{valor=2},{valor=1},]
+*/
+```
