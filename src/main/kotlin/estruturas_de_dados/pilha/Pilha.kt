@@ -6,7 +6,7 @@ class Pilha<T>(capacidade: Int) : CommonListStruct<T>(capacidade, "Pilha") {
     constructor() : this(10)
 
     fun empilhar(elemento: T) {
-        super.add(elemento)
+        super.CLadd(elemento)
     }
 
     fun desempilhar(): T? {

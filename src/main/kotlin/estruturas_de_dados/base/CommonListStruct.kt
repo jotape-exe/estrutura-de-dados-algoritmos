@@ -1,5 +1,14 @@
 package estruturas_de_dados.base;
 
+import estruturas_de_dados.vetor.Vetor
+
+//Estrutura genérica usada como classe PAI
+//Classes como Vetor e Pilha, pode usar seu metodos publicos diretamente
+
+//Nomeclatura de metodos
+//CL(Commom List)+objetivo()
+// Exemplo: CLAdicionar(), CLRemover() ...
+
 open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
     private var elemento: T? = null
     protected open var tamanho: Int = 0
@@ -12,7 +21,7 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
         }
     }
 
-    protected open fun add(valor: T) {
+    protected open fun CLadd(valor: T) {
         addSize()
         if (tamanho < elementos.size) {
             elementos[tamanho] = valor
@@ -23,7 +32,7 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
 
     }
 
-    protected open fun add(posicao: Int, valor: T) {
+    protected open fun CLadd(posicao: Int, valor: T) {
 
         validarPosicao(posicao)
 
@@ -39,7 +48,7 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
     }
 
     private fun validarPosicao(posicao: Int) {
-        if (posicao !in 0..<tamanho) {
+        if (posicao > tamanho) {
             throw IllegalArgumentException("Indice $posicao fora do vetor de tamanho ${tamanho}")
         }
     }
@@ -100,21 +109,33 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
         return posicao
     }
 
-    open fun clone(): CommonListStruct<T?> {
+    protected open fun CLclone(): CommonListStruct<T?> {
         val newArray = CommonListStruct<T?>(tamanho, tipo)
 
         for (element in elementos) {
-            newArray.add(element)
+            element?.let {
+                newArray.CLadd(it)
+            }
         }
 
         return newArray
     }
 
-    open fun length(): Int {
+    fun toVetor(list: CommonListStruct<T?>): Vetor<T?> {
+        val vetor = Vetor<T?>()
+
+        for (i in 0..<list.length()){
+            elementos[i]?.let { vetor.add(it) }
+        }
+
+        return vetor
+    }
+
+    fun length(): Int {
         return tamanho
     }
 
-    open fun clear() {
+    fun clear() {
         for (i in 0..<elementos.size) {
             elementos[i] = null
         }
@@ -124,6 +145,19 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
     fun estaVazio() = tamanho == 0
 
     fun naoEstaVazio() = !estaVazio()
+
+    fun lastIndexOf(elemento: T?): Int{
+        var posicao: Int = -1
+        for (i in 0..tamanho) {
+            if (elementos[i] == elemento) {
+                posicao = i
+            }
+        }
+        if (posicao == 0) {
+            throw IndexOutOfBoundsException("Elemento ${elemento} não existe no vetor")
+        }
+        return posicao
+    }
 
     fun remove(posicao: Int) {
         validarPosicao(posicao)
