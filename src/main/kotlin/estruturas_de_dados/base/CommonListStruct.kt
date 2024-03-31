@@ -71,32 +71,43 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
         }
     }
 
-    override fun toString(): String {
-        var string = ""
+    fun primeiroOuNull(): T?{
+        val element = elementos[0]
+        element?.let {
+            return  element
+        }
+        return null
+    }
 
-        elementos.forEach {
-            if (it != null) {
-                string += "{valor=${it}},"
+    override fun toString(): String {
+        val string = StringBuilder()
+
+        for (i in 0..<length()){
+            val element = CLGet(i)
+            if (element != null) {
+                string.append("{${element}}")
+            }
+
+            if (length()-1 > i){
+                string.append(",")
             }
         }
 
-        string = "$tipo[${string}]"
-
-        return string
+        return "$tipo[${string}]"
 
     }
 
-    open operator fun get(posicao: Int): T? {
+    protected open fun CLGet(posicao: Int): T? {
         validarPosicao(posicao)
 
         return elementos[posicao]
     }
 
     open fun contains(elemento: T?): Boolean {
-        return get(elemento) != -1
+        return CLGet(elemento) != -1
     }
 
-    open operator fun get(elemento: T?): Int {
+    protected open fun CLGet(elemento: T?): Int {
         var posicao: Int = -1
         for (i in 0..<tamanho) {
             if (elementos[i] == elemento) {
@@ -170,7 +181,7 @@ open class CommonListStruct<T>(capacidade: Int, tipoLista: String) {
     }
 
     fun remove(elemento: T?) {
-        remove(get((elemento)))
+        remove(CLGet((elemento)))
     }
 
 }

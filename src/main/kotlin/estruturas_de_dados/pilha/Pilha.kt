@@ -25,7 +25,7 @@ fun topo(): T? {
     if (super.estaVazio()) {
         return null
     }
-    return super.get(tamanho - 1)
+    return super.CLGet(tamanho - 1)
 }
 
 

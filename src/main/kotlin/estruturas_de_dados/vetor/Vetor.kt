@@ -20,4 +20,10 @@ class Vetor<T>(capacidade: Int): CommonListStruct<T>(capacidade, "Vetor"){
         val list =  super.CLclone()
         return  super.toVetor(list)
     }
+    operator fun get(posicao: Int): T? {
+        return super.CLGet(posicao = posicao)
+    }
+    operator fun get(elemento: T): Int {
+        return super.CLGet(elemento = elemento)
+    }
 }

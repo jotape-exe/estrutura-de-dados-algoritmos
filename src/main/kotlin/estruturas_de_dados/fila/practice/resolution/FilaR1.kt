@@ -17,7 +17,7 @@ fun main(){
     }
 }
 
-fun imprimirDocumento(documento: Documento){
+private fun imprimirDocumento(documento: Documento){
     var message = StringBuilder()
     var time = 500
 
@@ -26,6 +26,7 @@ fun imprimirDocumento(documento: Documento){
         message.append(".")
         print(message)
         Thread.sleep((time+documento.qtdFolhas).toLong())
+        message.append(".")
     }
     println()
     println("=-=-=-=-==-=-=-=-=-=")
@@ -33,4 +34,4 @@ fun imprimirDocumento(documento: Documento){
     println("=-=-=-=-==-=-=-=-=-=")
 }
 
-data class Documento(val nome: String, val qtdFolhas: Int)
+private data class Documento(val nome: String, val qtdFolhas: Int)
