@@ -1,13 +1,12 @@
 package estruturas_de_dados.fila.practice.resolution
 
 import estruturas_de_dados.fila.Fila
+import estruturas_de_dados.fila.FilaComPrioridade
 import kotlin.random.Random
 
-val fila = Fila<Paciente>()
+val fila = FilaComPrioridade<Paciente>()
 
-val filaVerde = Fila<Paciente>()
-val filaAmarela = Fila<Paciente>()
-val filaVermelha = Fila<Paciente>()
+val logAtendimento = Fila<Paciente>()
 
 fun main() {
     iniciarFilaPacientes()
@@ -41,50 +40,51 @@ private fun iniciarFilaPacientes() {
 private fun iniciarAtendimento() {
     println(fila)
 
+    var contadorPacientes = 0
+
     do {
-        val paciente = fila.pool()
+        fila.pool()?.let { atendido->
+            contadorPacientes++
 
-        if (paciente?.pulseira == PrioridadeAtendimento.VERDE) {
-            filaVerde.add(paciente)
-        } else if (paciente?.pulseira == PrioridadeAtendimento.AMARELO) {
-            filaAmarela.add(paciente)
-        } else {
-            paciente?.let {
-                filaVermelha.add(it)
-            }
+            println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            println("(Nº$contadorPacientes) Atendido: $atendido")
+            println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
+            logAtendimento.add(atendido)
         }
 
-        println("Atendendo...")
-        Thread.sleep(4000)
-        val novaPessoa = gerarPessoaAleatoria()
-        println("Nova Pessoa $novaPessoa \n")
-        fila.add(novaPessoa)
-        Thread.sleep(1000)
+        atenderNovaPessoa()
 
-
-        if (filaVermelha.naoEstaVazio()){
-            filaVermelha.pool()?.let {
-                println("Atendido: $it")
-            }
+        if (contadorPacientes == 10){
+            println("Fim do expediente")
+            println("=-=-= LOG =-=-=")
+            println(logAtendimento)
+            break
         }
 
-        if (filaVermelha.estaVazio()){
-            filaAmarela.pool()?.let {
-                println("Atendido: $it")
-            }
-        }
 
-        if (filaVermelha.estaVazio() && filaAmarela.estaVazio()){
-            filaVerde.pool()?.let {
-                println("Atendido: $it")
-            }
-        }
-
-    } while (filaVerde.naoEstaVazio() || filaVermelha.naoEstaVazio() || fila.naoEstaVazio())
+    } while (true)
 }
 
-fun atender() = "asd"
-data class Paciente(val nome: String, val pulseira: PrioridadeAtendimento)
+fun atenderNovaPessoa(){
+    println("Atendendo...")
+    Thread.sleep(4000)
+    val novaPessoa = gerarPessoaAleatoria()
+    fila.add(novaPessoa)
+    Thread.sleep(1000)
+
+}
+data class Paciente(val nome: String, val pulseira: PrioridadeAtendimento): Comparable<Paciente> {
+    override fun compareTo(outroPaciente: Paciente): Int {
+        if (outroPaciente.pulseira > this.pulseira){
+            return  1
+        } else if(outroPaciente.pulseira == this.pulseira){
+            return  0
+        }
+
+        return  -1
+    }
+}
 
 enum class PrioridadeAtendimento(value: Int) {
     VERDE(value = 2),
